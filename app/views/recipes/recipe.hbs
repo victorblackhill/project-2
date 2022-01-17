@@ -1,0 +1,23 @@
+<h2>{{name}}</h2>
+<ul>
+    <li>Description: {{description}} </li>
+    <li>Temperature: {{temperature}} </li>
+    <li>Grind: {{grind}} </li>
+    <li>Weight: {{weight}}</li>
+    <li>Water: {{water}}</li>
+    <li>Extraction: {{extraction}}</li>
+    <li>Infusion
+        <ol>
+            {{#each infusion}}
+            <li>{{this.volume}} mL during {{this.time}} seconds</li>
+            {{/each}}
+        </ol>
+    </li>
+
+
+</ul>
+<form action="comment/{{_id}}" method="post"><h2>Comment</h2>
+<label for="comment"></label>
+<input type="text" id="comment" name="comment">
+<button>Comment</button>
+</form>

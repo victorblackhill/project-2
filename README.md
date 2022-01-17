@@ -17,7 +17,12 @@
     - config/mongoDB.js : mongoDB with mongoose
     - config/cloudinary.js : cloudinary (file storage service) and related packages (cloudinary, multer, multer-storage-cloudinary), also includes some /* commented  code */ to test if cloudinary is working well
     - models: recipes
-    - middlewares: seedStuff
+    - middlewares:
+        - seedStuff:
+        - fetch.js : helper middlewares that fetch in the DB
+        - renderHelp.js :
+            - renderHelp
+            - sender : renders the request, not used in production
 
 
 ## Troubleshoot
