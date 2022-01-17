@@ -16,6 +16,8 @@
 - Basic express [express-generator](https://expressjs.com/en/starter/generator.html) with the following additions
     - config/mongoDB.js : mongoDB with mongoose
     - config/cloudinary.js : cloudinary (file storage service) and related packages (cloudinary, multer, multer-storage-cloudinary), also includes some /* commented  code */ to test if cloudinary is working well
+    - models: recipes
+    - middlewares: seedStuff
 
 
 ## Troubleshoot
