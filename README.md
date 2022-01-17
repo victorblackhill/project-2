@@ -22,4 +22,3 @@
 
 ## Troubleshoot
 - Cloudinary connection failed : use test in the /*commented section*/ in config/cloudinary.js
-
