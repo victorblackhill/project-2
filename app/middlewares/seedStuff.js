@@ -9,7 +9,7 @@ const mongoose = require("mongoose")
 
 
 const seedStuff = async (seeds,myModel)=>{
-    console.log(myModel)
+    // console.log(myModel)
     try{
         const deleted = await myModel.deleteMany()
         const status = await myModel.find()

@@ -1,31 +1,49 @@
+//all functions render or send properties of the req, called the data keys
+// Example : dataKey ["myFetch","body"] => res.Send({body: req.body, myFetch: req.myFetch})
 
-const mySender = (key) => {
+const mySender = (dataKeys = ["myFetch"]) => {
   return async (req, res, next) => {
-        try {
-          console.log("//sender ------ // - ->",req[key])  
-          res.send(req[key]);
-          //next()
-        } catch (err) {
-          next(err);
-        }
-      };
-  }
-
-const myRender = (viewRoute, data ="",key = "" )=>{
-  return async (req, res, next)=>{
-        try{
-          //const dataObj = {}
-          //dataObj[key] = req[data]
-          //console.log(req[data].toObject())
-          res.render(viewRoute,req[data].toObject())
-
-    }catch(err){
-      next(err)
+    try {
+      
+      let sentData = {}
+      dataKeys.forEach((key)=>{ sentData[key] = req[key] })
+      //console.log("//sender ------ // - ->", sentData);
+      res.send(sentData);
+      //next()
+    } catch (err) {
+      next(err);
     }
-  }
-}
+  };
+};
+
+const myRender = (viewRoute, dataKeys = ["myFetch"]) => {
+
+  return async (req, res, next) => {
+
+    try {
+
+      let sentData = {}
+      dataKeys.forEach((key)=>{ sentData[key] = req[key] })
+
+      res.render(viewRoute, sentData);
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
+const myRedirect = (viewRoute) => {
+  return async (req, res, next) => {
+    try {
+      res.redirect(viewRoute);
+    } catch (err) {
+      next(err);
+    }
+  };
+};
 
 module.exports = {
-  mySender:mySender,
-  myRender:myRender
-}
+  mySender: mySender,
+  myRender: myRender,
+  myRedirect: myRedirect,
+};

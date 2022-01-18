@@ -1,23 +1,28 @@
-<h2>{{name}}</h2>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type ="module" src="/javascripts/comments.js" ></script>
+
+<h2>{{recipes.name}}</h2>
 <ul>
-    <li>Description: {{description}} </li>
-    <li>Temperature: {{temperature}} </li>
-    <li>Grind: {{grind}} </li>
-    <li>Weight: {{weight}}</li>
-    <li>Water: {{water}}</li>
-    <li>Extraction: {{extraction}}</li>
+    <li>Description: {{recipes.description}} </li>
+    <li>Temperature: {{recipes.temperature}} </li>
+    <li>Grind: {{recipes.grind}} </li>
+    <li>Weight: {{recipes.weight}}</li>
+    <li>Water: {{recipes.water}}</li>
+    <li>Extraction: {{recipes.extraction}}</li>
     <li>Infusion
         <ol>
-            {{#each infusion}}
+            {{#each recipes.infusion}}
             <li>{{this.volume}} mL during {{this.time}} seconds</li>
             {{/each}}
         </ol>
     </li>
-
-
 </ul>
-<form action="comment/{{_id}}" method="post"><h2>Comment</h2>
-<label for="comment"></label>
-<input type="text" id="comment" name="comment">
-<button>Comment</button>
+
+<h2>User comments</h2>
+{{> ulist comments}}
+
+<form action="comment/{{_id}}" method="post"><h2>Add your comments!</h2>
+    <input type="text" id="comment" name="content" value="add your comments">
+    <input id="recipe" type="hidden" name="recipe" value="{{recipes._id}}">
 </form>
+<button type="button" id="btn-comment">Comment</button>
