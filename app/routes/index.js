@@ -28,8 +28,27 @@ router.post(
 );
 */
 
-router.post("/comment/:id",
-myFetch(CommentModel).create,
+router.post("/comment/:id([a-f0-9]{24})",
+myFetch(CommentModel).create, // être 
 mySender())
 
+
+// A compléter
+// puis créer la méthode .delete dans fetch
+router.post("/comment/delete",myFetch(CommentModel).delete,mySender())
+
 module.exports = router;
+
+
+/*
+
+(req, res, next) => {
+  if (req.body.content === '') {
+    req.body.content = 'No empty comments !'
+    next()
+  } else {
+    next('You did write something')
+  }
+}
+
+*/

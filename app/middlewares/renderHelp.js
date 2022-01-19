@@ -1,13 +1,13 @@
 //all functions render or send properties of the req, called the data keys
 // Example : dataKey ["myFetch","body"] => res.Send({body: req.body, myFetch: req.myFetch})
 
-const mySender = (dataKeys = ["myFetch"]) => {
+const mySender = (dataKeys = ["myFetch","body"]) => {
   return async (req, res, next) => {
     try {
-      
+      console.log(">>>>>>>", req.body)
       let sentData = {}
       dataKeys.forEach((key)=>{ sentData[key] = req[key] })
-      //console.log("//sender ------ // - ->", sentData);
+      console.log("//sender ------ // - ->", sentData);
       res.send(sentData);
       //next()
     } catch (err) {

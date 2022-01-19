@@ -1,5 +1,9 @@
 <ul id="comment-list">
     {{#each this}}
-    <li>{{this.content}}</li>
+    <li id={{this._id}} >
+        <i class="fa fa-trash" data-commentid={{this.id}} ></i>
+        <span>{{this.content}}</span>
+    </li>
     {{/each}}
 </ul>
+

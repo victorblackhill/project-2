@@ -40,6 +40,18 @@ const myFetch =  (myModule, key = "myFetch") => {
       }
     },
 
+    delete: async function(req,res,next){
+      try{
+        request = req.request ? req.request : req.body
+        const deleted = await myModule.findOneAndDelete(request)
+        req[key] = {...deleted.toObject()}
+        console.log("deleted in fetch",key,req[key])
+        next()
+      }catch(err){
+        next(err)
+      }
+    },
+
   };
 };
 
