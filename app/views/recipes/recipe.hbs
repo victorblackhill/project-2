@@ -18,11 +18,12 @@
     </li>
 </ul>
 
-<h2>User comments</h2>
-{{> ulist comments}}
-
 <form action="comment/{{_id}}" method="post"><h2>Add your comments!</h2>
     <input type="text" id="comment" name="content" value="add your comments">
     <input id="recipe" type="hidden" name="recipe" value="{{recipes._id}}">
 </form>
 <button type="button" id="btn-comment">Comment</button>
+
+<h2>Comments</h2>
+{{> ulist comments}}
+

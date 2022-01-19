@@ -52,6 +52,19 @@ const myFetch =  (myModule, key = "myFetch") => {
       }
     },
 
+    update: async function(req,res,next){
+      try{
+        request = req.request ? req.request : req.body
+        const updated = await myModule.findByIdAndUpdate(request._id,request,{new:true})
+        console.log(updated)
+        req[key] = {...updated.toObject()}
+        console.log("updated in fetch",key,req[key])
+        next()
+      }catch(err){
+        next(err)
+      }
+    },
+
   };
 };
 
