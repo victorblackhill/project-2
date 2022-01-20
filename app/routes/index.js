@@ -5,12 +5,43 @@ const CommentModel = require("./../models/Comment.model")
 const myFetch = require("../middlewares/fetch");
 const mySender = require("../middlewares/renderHelp").mySender;
 const myRender = require("../middlewares/renderHelp").myRender;
-const myRedirect = require("../middlewares/renderHelp").myRedirect
+const myRedirect = require("../middlewares/renderHelp").myRedirect;
+const { Router } = require("express");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
+
+router.get("/recipes/:id([a-f0-9]{24})", 
+ async (req,res,next) => {try {
+    req.body = {_id:req.params.id}
+    console.log(req.body)
+    next()
+  }catch(err){
+    next(err)}
+},
+myFetch(RecipeModel,"recipes").find,
+async (req,res,next)=>{
+  try{
+    console.log(req.recipes[0]._id.valueOf())
+    req.body = {recipe:req.recipes[0]._id.valueOf()}
+    console.log(req.body)
+    next()
+  }catch(err){
+    next(err)
+  }
+},
+myFetch(CommentModel,"comments").find,
+myRender("recipes/recipe.hbs",["recipes","comments"])
+
+)
+
+router.get("/recipes/details",
+  myFetch(RecipeModel,"recipes").findOne,
+  myFetch(CommentModel,"comments").find,//mySender(["recipes","comments"]),
+  myRender("recipes/recipe.hbs",["recipes","comments"])
+)
 
 router.get(
   "/recipes/any",
@@ -20,13 +51,15 @@ router.get(
   myRender("recipes/recipe.hbs",["recipes","comments"])
 );
 
-/*
-router.post(
-  "/recipes/comment/:id",
-  myFetch(CommentModel).create,
-  myRedirect("/recipes/any")
-);
-*/
+
+
+router.get("/recipes/index",
+myFetch(RecipeModel,"recipes").find, //mySender(["recipes","body"]),
+myRender("recipes/allRecipes.hbs",["recipes","body"])
+  
+)
+
+
 
 router.post("/comment/:id([a-f0-9]{24})",
 myFetch(CommentModel).create, // être 

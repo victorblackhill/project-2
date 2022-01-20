@@ -59,7 +59,6 @@ const sendComment = async ()=>{
         
         const addedComment = await axios.post("/comment/"+myRecipe.value, newComment)
 
-        console.log(addedComment.data.myFetch)
         appendComment(addedComment.data.myFetch)
 
     }catch(err){console.error(err)}

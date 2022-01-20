@@ -1,0 +1,22 @@
+<h2>{{name}}</h2>
+<ul>
+    <li>Description: {{description}} </li>
+    <li>Temperature: {{temperature}} </li>
+    <li>Grind: {{grind}} </li>
+    <li>Weight: {{weight}}</li>
+    <li>Water: {{water}}</li>
+    <li>Extraction: {{extraction}}</li>
+    <li>Infusion
+        <ol>
+            {{#each infusion}}
+            <li>{{this.volume}} mL during {{this.time}} seconds</li>
+            {{/each}}
+        </ol>
+    </li>
+</ul>
+
+<form method="post"><h2>Add your comments!</h2>
+    <input type="text" id="comment" name="content" value="add your comments">
+    <input id="recipe" type="hidden" name="recipe" value="{{_id}}">
+    <button type="button" id="btn-comment">Comment</button>
+</form>

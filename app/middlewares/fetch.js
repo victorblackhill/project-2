@@ -2,6 +2,19 @@
 // always recieve res,req,next as input
 // always "pass the ball with next"
 
+
+function isEmpty(obj) {
+  
+  for(var prop in obj) {
+    if(Object.prototype.hasOwnProperty.call(obj, prop)) {
+      return false;
+    }
+    //info here https://stackoverflow.com/questions/679915/how-do-i-test-for-an-empty-javascript-object
+  }
+
+  return JSON.stringify(obj) === JSON.stringify({});
+}
+
 const myFetch =  (myModule, key = "myFetch") => {
   return {
     findOne: async function (req, res, next) {
@@ -31,8 +44,10 @@ const myFetch =  (myModule, key = "myFetch") => {
     //other methods are going to be added here
     find: async function(req,res,next){
       try{
-        request = req.request ? req.request : req.body
-        const searched = await myModule.find(request)
+        const request =  !req.request || isEmpty(req.request) ? !req.body || isEmpty(req.body) ? {} : req.body : req.request 
+        
+        //check if the request is empty
+        const searched = isEmpty(request)? await myModule.find() : await myModule.find(request)
         req[key] = searched
         next()
       }catch(err){

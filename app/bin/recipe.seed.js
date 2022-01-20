@@ -25,6 +25,35 @@ const recipesSeed = [
             }
         ]
     },
+
+    {
+        name : "Simple V60",
+        temperature :92.5,
+        grind:20,
+        weight:25,
+        water:"Volvic",
+        extraction:"V60",
+        description:"A préparer avec V60 numéro 2",
+        infusion:[
+            {volume:50,
+                time:30
+            },
+            {volume:150,
+                time:30
+            },
+            {volume:100,
+                time:30
+            },
+            {volume:100,
+                time:30
+            },
+            {volume:100,
+                time:30
+            },
+        ]
+    },
+
+
 ]
 
 //seed the DB with the recipes seed

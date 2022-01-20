@@ -16,7 +16,7 @@ const mySender = (dataKeys = ["myFetch","body"]) => {
   };
 };
 
-const myRender = (viewRoute, dataKeys = ["myFetch"]) => {
+const myRender = (viewRoute, dataKeys = ["myFetch","body"]) => {
 
   return async (req, res, next) => {
 
